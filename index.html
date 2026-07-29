@@ -174,21 +174,36 @@
   .why-item h3{font-family:var(--fd);font-size:17px;font-weight:700;text-transform:uppercase;margin-bottom:5px;line-height:1.05}
   .why-item p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
-  /* LIFESTYLE BAND */
-  .life{padding:0}
-  .life-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
-  @media(max-width:760px){.life-grid{grid-template-columns:1fr}}
-  .life-card{position:relative;aspect-ratio:16/11;overflow:hidden;background:#000;cursor:zoom-in}
-  @media(max-width:760px){.life-card{aspect-ratio:16/10}}
-  .life-card img,.life-card video{width:100%;height:100%;object-fit:cover;object-position:center 60%;transition:transform .5s}
-  .life-card:hover img{transform:scale(1.05)}
-  .life-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.82),transparent 48%);pointer-events:none}
-  .life-cap{position:absolute;left:16px;bottom:14px;right:16px;z-index:2;pointer-events:none}
-  .life-cap .k{font-family:var(--fd);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
-  .life-cap h4{font-family:var(--fd);font-size:20px;font-weight:800;text-transform:uppercase;line-height:1;margin-top:3px}
-  .life-cap p{font-size:12px;color:#cfcfcf;margin-top:4px}
-  .life-zoom{position:absolute;top:10px;right:10px;z-index:3;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#fff}
-  .life-zoom svg{width:15px;height:15px}
+  /* CARRUSEL "EN USO" — movimiento continuo + control */
+  .usec{padding:46px 0 40px;border-bottom:1px solid var(--line)}
+  .usec-head{max-width:var(--wrap);margin:0 auto 20px;padding:0 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .usec-head h2{font-family:var(--fd);font-size:clamp(26px,3.6vw,38px);font-weight:800;text-transform:uppercase;line-height:1}
+  .usec-wrap{position:relative;max-width:1340px;margin:0 auto;padding:0 14px}
+  .usec-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:2px}
+  .usec-track::-webkit-scrollbar{display:none}
+  .use-slide{flex:0 0 33%;scroll-snap-align:center;position:relative;aspect-ratio:16/11;border-radius:14px;overflow:hidden;background:#000;cursor:zoom-in}
+  @media(max-width:900px){.use-slide{flex-basis:72%}}
+  @media(max-width:560px){.use-slide{flex-basis:88%;aspect-ratio:16/12}}
+  .use-slide img,.use-slide video{width:100%;height:100%;object-fit:cover;object-position:center 58%}
+  .use-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.82),transparent 46%);pointer-events:none}
+  .use-cap{position:absolute;left:16px;bottom:14px;right:16px;z-index:2;pointer-events:none}
+  .use-cap .k{font-family:var(--fd);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
+  .use-cap h4{font-family:var(--fd);font-size:20px;font-weight:800;text-transform:uppercase;line-height:1;margin-top:3px}
+  .use-cap p{font-size:12px;color:#cfcfcf;margin-top:4px}
+  .use-vtag{position:absolute;top:10px;left:10px;z-index:3;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);border-radius:20px;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:3px 9px;display:flex;align-items:center;gap:5px;pointer-events:none}
+  .use-vtag svg{width:11px;height:11px}
+  .use-zoom{position:absolute;top:10px;right:10px;z-index:3;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#fff}
+  .use-zoom svg{width:15px;height:15px}
+  .usec-arw{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:44px;height:44px;border-radius:50%;background:rgba(10,10,11,.72);border:1px solid var(--line);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .usec-arw:hover{background:var(--red);border-color:var(--red)}
+  .usec-arw.prev{left:2px}.usec-arw.next{right:2px}
+  .usec-ctrl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
+  .usec-play{display:inline-flex;align-items:center;gap:7px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:7px 13px;font-family:var(--fd);font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:.2s}
+  .usec-play:hover{border-color:#555;color:#fff}
+  .usec-play svg{width:13px;height:13px}
+  .usec-dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+  .usec-dot{width:8px;height:8px;border-radius:50%;background:var(--line);border:none;padding:0;cursor:pointer;transition:.25s}
+  .usec-dot.active{background:var(--red);width:22px;border-radius:4px}
 
   /* GARANTÍA */
   .assure{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -354,24 +369,20 @@
   </div>
 </section>
 
-<!-- LIFESTYLE -->
-<section class="life">
-  <div class="life-grid">
-    <div class="life-card" data-zoomvid="assets/video/IMG_0956.mp4" data-poster="assets/life-llama.jpg">
-      <video src="assets/video/IMG_0956.mp4" poster="assets/life-llama.jpg" autoplay muted loop playsinline preload="metadata" style="object-position:65% 58%"></video>
-      <span class="life-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
-      <div class="life-cap"><div class="k">Llama estable</div><h4>Fuego que obedece</h4><p>Dardo azul parejo de 400 a 1.300 °C.</p></div>
-    </div>
-    <div class="life-card" data-zoom="assets/life-fuego.jpg">
-      <img src="assets/life-fuego.jpg" alt="Soldando una pieza" style="object-position:center 52%">
-      <span class="life-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
-      <div class="life-cap"><div class="k">En el banco</div><h4>Suelda y funde</h4><p>Filigrana, cadenas, recocido y reparación.</p></div>
-    </div>
-    <div class="life-card" data-zoom="assets/life-boquilla.jpg">
-      <img src="assets/life-boquilla.jpg" alt="Boquillas intercambiables" style="object-position:center 50%">
-      <span class="life-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
-      <div class="life-cap"><div class="k">3 boquillas</div><h4>Cada trabajo, su pico</h4><p>Cambio rápido entre chica, mediana y grande.</p></div>
-    </div>
+<!-- CARRUSEL EN USO -->
+<section class="usec">
+  <div class="usec-head">
+    <div><div class="eyebrow">En uso</div><h2>FMR en el taller</h2></div>
+    <p class="lead" style="font-size:14px">Fotos y videos reales. El carrusel avanza solo — pásalo, párralo o retrocédelo cuando quieras.</p>
+  </div>
+  <div class="usec-wrap">
+    <button class="usec-arw prev" id="usePrev" aria-label="Anterior">‹</button>
+    <div class="usec-track" id="useTrack"></div>
+    <button class="usec-arw next" id="useNext" aria-label="Siguiente">›</button>
+  </div>
+  <div class="usec-ctrl">
+    <button class="usec-play" id="usePlay" aria-label="Pausar/Reproducir"></button>
+    <div class="usec-dots" id="useDots"></div>
   </div>
 </section>
 
@@ -915,6 +926,66 @@
       if(mpNote){ mpNote.textContent='MercadoPago aún no está vinculado. Por ahora finalizá por WhatsApp; el pago en línea se activa al pegar el token.'; mpNote.style.color='var(--gold)'; }
     });
   }
+
+  /* ---------- CARRUSEL "EN USO" ---------- */
+  (function(){
+    var track=document.getElementById('useTrack'); if(!track) return;
+    var dotsWrap=document.getElementById('useDots'), prev=document.getElementById('usePrev'),
+        next=document.getElementById('useNext'), playBtn=document.getElementById('usePlay'),
+        wrap=document.querySelector('.usec-wrap');
+
+    /* >> EDITÁ AQUÍ los slides (foto o video) del carrusel << */
+    var SLIDES=[
+      {t:'video', src:'assets/video/IMG_0956.mp4', poster:'assets/life-llama.jpg', k:'Llama estable', h:'Fuego que obedece', p:'Dardo azul parejo de 400 a 1.300 °C.'},
+      {t:'video', src:'assets/video/IMG_0959.mp4', poster:'assets/life-fuego.jpg', k:'En el banco', h:'Suelda y funde', p:'Filigrana, cadenas, recocido y reparación.'},
+      {t:'img',   src:'assets/life-boquilla.jpg', k:'3 boquillas', h:'Cada trabajo, su pico', p:'Cambio rápido entre chica, mediana y grande.'},
+      {t:'video', src:'assets/video/IMG_0952.mp4', poster:'assets/video/IMG_0952.jpg', k:'Boquillas', h:'Cambio en segundos', p:'Enroscá la boquilla y a trabajar.'},
+      {t:'img',   src:'assets/IMG_4182.jpg', k:'Aluminio CNC', h:'Cuerpo torneado', p:'Ligero, resistente y balanceado en la mano.'},
+      {t:'video', src:'assets/video/IMG_0968.mp4', poster:'assets/video/IMG_0968.jpg', k:'Accesorio', h:'Base giratoria 360°', p:'Trabajá la pieza desde cualquier ángulo.'},
+      {t:'img',   src:'assets/boquillas.jpg', k:'De fábrica', h:'Boquillas propias', p:'Producción CNC, disponibles como repuesto.'}
+    ];
+    var zoomSvg='<span class="use-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>';
+    var vtag='<span class="use-vtag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Video</span>';
+    function cap(s){ return '<div class="use-cap"><div class="k">'+(s.k||'')+'</div><h4>'+(s.h||'')+'</h4><p>'+(s.p||'')+'</p></div>'; }
+
+    var slides=[];
+    SLIDES.forEach(function(s){
+      var el=document.createElement('div'); el.className='use-slide';
+      if(s.t==='video'){
+        el.setAttribute('data-zoomvid', s.src); el.setAttribute('data-poster', s.poster||'');
+        el.innerHTML='<video src="'+s.src+'" poster="'+(s.poster||'')+'" autoplay muted loop playsinline preload="metadata"></video>'+vtag+zoomSvg+cap(s);
+      } else {
+        el.setAttribute('data-zoom', s.src);
+        el.innerHTML='<img src="'+s.src+'" alt="'+(s.h||'')+'" loading="lazy">'+zoomSvg+cap(s);
+      }
+      track.appendChild(el); slides.push(el);
+    });
+
+    var idx=0;
+    slides.forEach(function(_,i){ var d=document.createElement('button'); d.className='usec-dot'+(i===0?' active':''); d.type='button'; d.setAttribute('aria-label','Ir al slide '+(i+1)); d.addEventListener('click',function(){ goTo(i); restart(); }); dotsWrap.appendChild(d); });
+    var dots=dotsWrap.querySelectorAll('.usec-dot');
+    function setActive(n){ idx=n; dots.forEach(function(d,j){ d.classList.toggle('active', j===n); }); }
+    function goTo(i){ i=Math.max(0,Math.min(slides.length-1,i)); var sl=slides[i]; if(sl) track.scrollTo({left: sl.offsetLeft-(track.clientWidth-sl.clientWidth)/2, behavior:'smooth'}); setActive(i); }
+
+    var st; track.addEventListener('scroll',function(){ clearTimeout(st); st=setTimeout(function(){ var c=track.scrollLeft+track.clientWidth/2, best=0, bd=1e9; slides.forEach(function(sl,j){ var mid=sl.offsetLeft+sl.clientWidth/2, dd=Math.abs(mid-c); if(dd<bd){bd=dd;best=j;} }); setActive(best); }, 90); });
+
+    prev.addEventListener('click',function(){ goTo(idx-1); restart(); });
+    next.addEventListener('click',function(){ goTo(idx+1); restart(); });
+
+    var playing=true, timer=null;
+    var icoPause='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg> Pausar';
+    var icoPlayC='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Reproducir';
+    function tick(){ goTo((idx+1)%slides.length); }
+    function start(){ stop(); if(playing && slides.length>1) timer=setInterval(tick,3800); }
+    function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+    function restart(){ if(playing) start(); }
+    playBtn.innerHTML=icoPause;
+    playBtn.addEventListener('click',function(){ playing=!playing; playBtn.innerHTML=playing?icoPause:icoPlayC; if(playing)start(); else stop(); });
+
+    if(wrap){ wrap.addEventListener('mouseenter',stop); wrap.addEventListener('mouseleave',function(){ if(playing)start(); }); }
+    track.addEventListener('touchstart',stop,{passive:true});
+    if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+  })();
 
   render();
 })();
