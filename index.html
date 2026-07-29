@@ -71,6 +71,17 @@
   .mp-logo{height:30px;width:auto;display:block}
   .foot-pay{margin-top:12px;background:none;border:none;padding:0;gap:9px}
   @media(max-width:720px){.foot-pay{justify-content:center}}
+  /* Franja medios de pago */
+  .pagos{background:var(--panel);border-bottom:1px solid var(--line)}
+  .pagos-in{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:22px 24px;flex-wrap:wrap}
+  .pagos-txt h3{font-family:var(--fd);font-size:22px;font-weight:800;text-transform:uppercase;line-height:1;margin:6px 0 6px}
+  .pagos-txt p{font-size:13.5px;color:var(--muted);max-width:52ch}
+  .pagos-card{background:#fff;border-radius:14px;padding:16px 22px;box-shadow:0 8px 26px rgba(0,0,0,.35);flex-shrink:0}
+  .pagos-card img{height:96px;width:auto;display:block}
+  @media(max-width:720px){.pagos-in{flex-direction:column;text-align:center;align-items:center}.pagos-txt p{margin:0 auto}.pagos-card img{height:80px}}
+  .foot-pay img.mp-logo,.foot-pay .pay-mini{height:auto}
+  .pay-mini{background:#fff;border-radius:10px;padding:8px 12px;display:inline-block}
+  .pay-mini img{height:44px;width:auto;display:block}
   .hero-media{position:relative;background:#0b0b0c;overflow:hidden;min-height:440px}
   .hero-slider{position:absolute;inset:0;display:flex;width:400%;height:100%;animation:heroSlide 18s cubic-bezier(.7,0,.3,1) infinite}
   .hero-slide{flex:0 0 25%;height:100%;position:relative}
@@ -360,9 +371,9 @@
       <div><b>Envío gratis</b> en sopletes*</div>
     </div>
     <div class="paybadge">
-      <span class="paybadge-t">Paga seguro con</span>
-      <img src="assets/mercadopago.png" alt="MercadoPago" class="mp-logo">
-      <span class="paybadge-s">tarjeta · PSE · efectivo</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#009EE3" stroke-width="1.8" style="width:20px;height:20px;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span class="paybadge-t">Pago seguro con <b style="color:#009EE3">MercadoPago</b></span>
+      <span class="paybadge-s">· cualquier tarjeta, PSE o efectivo</span>
     </div>
   </div>
   <div class="hero-media">
@@ -382,6 +393,20 @@
     <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z"/></svg><div><b>Hasta 1.300 °C</b><span>Control fino de la llama</span></div></div>
     <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><b>Garantía 3 meses</b><span>Defectos de fábrica</span></div></div>
     <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg><div><b>Envío nacional</b><span>A todo Colombia</span></div></div>
+  </div>
+</div>
+
+<!-- MEDIOS DE PAGO -->
+<div class="pagos">
+  <div class="wrap pagos-in">
+    <div class="pagos-txt">
+      <div class="eyebrow" style="color:#009EE3">Pago seguro</div>
+      <h3>Convenio con MercadoPago</h3>
+      <p>Paga con <b>cualquier tarjeta</b> de crédito o débito, PSE o efectivo. Tus datos viajan protegidos por la pasarela de MercadoPago.</p>
+    </div>
+    <div class="pagos-card">
+      <img src="assets/medios-pago.png" alt="Medios de pago: MercadoPago, Visa, American Express, Mastercard, Codensa, PSE">
+    </div>
   </div>
 </div>
 
@@ -495,9 +520,9 @@
       <a href="https://wa.me/573159524569">WhatsApp 315 952 4569</a>
       <a href="mailto:ventas@fmrcolombia.com" data-social="email">ventas@fmrcolombia.com</a>
       <a href="#catalogo">Hacer un pedido</a>
-      <div class="paybadge foot-pay">
-        <span class="paybadge-t">Pagos con</span>
-        <img src="assets/mercadopago.png" alt="MercadoPago" class="mp-logo">
+      <div class="foot-pay">
+        <span class="paybadge-t" style="display:block;margin-bottom:8px">Medios de pago</span>
+        <span class="pay-mini"><img src="assets/medios-pago.png" alt="MercadoPago, Visa, Amex, Mastercard, Codensa, PSE"></span>
       </div>
       <div class="socials">
         <a class="soc" href="https://facebook.com/fmrcolombia" target="_blank" rel="noopener" aria-label="Facebook" data-social="facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7v3h2.8v8z"/></svg></a>
