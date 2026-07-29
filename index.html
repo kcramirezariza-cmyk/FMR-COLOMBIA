@@ -83,7 +83,7 @@
   .pay-mini{background:#fff;border-radius:10px;padding:8px 12px;display:inline-block}
   .pay-mini img{height:44px;width:auto;display:block}
   .hero-media{position:relative;background:#0b0b0c;overflow:hidden;min-height:440px}
-  .hero-slider{position:absolute;inset:0;display:flex;width:400%;height:100%;animation:heroSlide 18s cubic-bezier(.7,0,.3,1) infinite}
+  .hero-slider{position:absolute;inset:0;display:flex;width:400%;height:100%;animation:heroSlide 12s cubic-bezier(.7,0,.3,1) infinite}
   .hero-slide{flex:0 0 25%;height:100%;position:relative}
   .hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
   .hero-tagx{position:absolute;left:20px;bottom:18px;z-index:4;background:rgba(0,0,0,.55);border:1px solid var(--line);border-left:2px solid var(--red);font-family:var(--fd);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;padding:5px 11px;border-radius:4px}
@@ -370,18 +370,13 @@
       <div><b>3–5 días</b> de entrega</div>
       <div><b>Envío gratis</b> en sopletes*</div>
     </div>
-    <div class="paybadge">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#009EE3" stroke-width="1.8" style="width:20px;height:20px;flex-shrink:0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-      <span class="paybadge-t">Pago seguro con <b style="color:#009EE3">MercadoPago</b></span>
-      <span class="paybadge-s">· cualquier tarjeta, PSE o efectivo</span>
-    </div>
   </div>
   <div class="hero-media">
     <div class="hero-slider">
-      <div class="hero-slide"><img src="assets/IMG_4181.jpg" alt="Soplete FMR Aluminio"><span class="hero-tagx">Aluminio</span></div>
-      <div class="hero-slide"><img src="assets/IMG_4182.jpg" alt="Soplete FMR Negro"><span class="hero-tagx">Negro</span></div>
-      <div class="hero-slide"><img src="assets/IMG_4187.jpg" alt="Soplete FMR Rojo"><span class="hero-tagx">Rojo</span></div>
-      <div class="hero-slide"><img src="assets/IMG_4181.jpg" alt="Soplete FMR Aluminio"><span class="hero-tagx">Aluminio</span></div>
+      <div class="hero-slide"><img src="assets/IMG_4181.jpg" alt="Soplete FMR Aluminio"></div>
+      <div class="hero-slide"><img src="assets/IMG_4182.jpg" alt="Soplete FMR Negro"></div>
+      <div class="hero-slide"><img src="assets/IMG_4187.jpg" alt="Soplete FMR Rojo"></div>
+      <div class="hero-slide"><img src="assets/IMG_4181.jpg" alt="Soplete FMR Aluminio"></div>
     </div>
   </div>
 </section>
@@ -396,19 +391,6 @@
   </div>
 </div>
 
-<!-- MEDIOS DE PAGO -->
-<div class="pagos">
-  <div class="wrap pagos-in">
-    <div class="pagos-txt">
-      <div class="eyebrow" style="color:#009EE3">Pago seguro</div>
-      <h3>Convenio con MercadoPago</h3>
-      <p>Paga con <b>cualquier tarjeta</b> de crédito o débito, PSE o efectivo. Tus datos viajan protegidos por la pasarela de MercadoPago.</p>
-    </div>
-    <div class="pagos-card">
-      <img src="assets/medios-pago.png" alt="Medios de pago: MercadoPago, Visa, American Express, Mastercard, Codensa, PSE">
-    </div>
-  </div>
-</div>
 
 <!-- CATÁLOGO -->
 <section id="catalogo">
@@ -419,6 +401,20 @@
       <p class="lead">Cada producto con sus fotos, video y ficha técnica. Añádelo al carrito y arma tu pedido en un solo mensaje de WhatsApp.</p>
     </div>
     <div class="cat-track" id="catTrack"></div>
+  </div>
+</section>
+
+<!-- MEDIOS DE PAGO (debajo del catálogo) -->
+<section class="pagos">
+  <div class="wrap pagos-in">
+    <div class="pagos-txt">
+      <div class="eyebrow" style="color:#009EE3">Pago seguro</div>
+      <h3>Convenio con MercadoPago</h3>
+      <p>Paga con <b>cualquier tarjeta</b> de crédito o débito, PSE o efectivo. Tus datos viajan protegidos por la pasarela de MercadoPago.</p>
+    </div>
+    <div class="pagos-card">
+      <img src="assets/medios-pago.png" alt="Medios de pago: MercadoPago, Visa, American Express, Mastercard, Codensa, PSE">
+    </div>
   </div>
 </section>
 
