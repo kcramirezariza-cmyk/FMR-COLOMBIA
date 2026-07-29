@@ -1,0 +1,17 @@
+# Archivos fuente pesados (no van a la web)
+*.MOV
+*.JPG.jpeg
+(2).jpeg
+
+# Respaldos y utilidades locales
+*.backup.html
+optimize-images.ps1
+convert-videos.ps1
+serve.ps1
+
+# Carpetas de trabajo internas (no usadas por la página)
+assets/scan/
+assets/posters/
+
+# Todas las imágenes fuente .jpeg (la web usa .jpg optimizados)
+*.jpeg

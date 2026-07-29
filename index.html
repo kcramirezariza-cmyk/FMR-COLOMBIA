@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FMR Colombia — Sopletes y herramientas para joyería</title>
+<meta name="description" content="Sopletes FMR fabricados en Colombia para joyería artesanal. Aluminio CNC, 3 boquillas intercambiables, control de llama de 400 a 1.300 °C. Envío a todo el país.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap');
+
+  :root{
+    --red:#C1121F; --red-dark:#9A0E18; --ink:#0E0E0F; --panel:#151516;
+    --card:#1a1a1c; --line:#2a2a2d; --fg:#EDEDEA;
+    --muted:#9a9a9a; --muted-2:#6f6f72; --gold:#C8A84B; --green:#1EA85C;
+    --fd:'Barlow Condensed',sans-serif; --fb:'Barlow',sans-serif;
+    --wrap:1180px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--fg);font-family:var(--fb);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+  h2.title{font-family:var(--fd);font-weight:800;line-height:.98;text-transform:uppercase;font-size:clamp(30px,4.6vw,50px);margin:10px 0 14px}
+  .lead{color:var(--muted);max-width:58ch;font-size:16px}
+  .money{font-family:var(--fd);font-weight:800;font-variant-numeric:tabular-nums}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fd);font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    border-radius:9px;cursor:pointer;border:1px solid transparent;transition:transform .12s,background .2s,border-color .2s,filter .2s;font-size:16px;padding:14px 24px}
+  .btn:active{transform:scale(.98)}
+  .btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red-dark)}
+  .btn-ghost{background:none;border-color:var(--line);color:var(--fg)}.btn-ghost:hover{border-color:#666}
+  .btn-wa{background:var(--green);color:#fff}.btn-wa:hover{filter:brightness(1.08)}
+  .btn-mp{width:100%;background:#009EE3;color:#fff;margin-top:4px}.btn-mp:hover{filter:brightness(1.06)}
+  .btn-mp:disabled,.btn-mp.pending{opacity:.55;cursor:not-allowed}
+  .pay-sep{display:flex;align-items:center;gap:10px;margin:14px 0 10px;color:var(--muted-2);font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+  .pay-sep::before,.pay-sep::after{content:'';flex:1;height:1px;background:var(--line)}
+  .pay-note{font-size:11.5px;color:var(--muted-2);text-align:center;margin-top:8px}
+  .btn-lg{font-size:17px;padding:16px 30px}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:80;background:rgba(14,14,15,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .nav-logo img{height:38px}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{font-family:var(--fd);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--fg)}
+  .cart-btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);color:var(--fg);
+    font-family:var(--fd);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;padding:9px 14px;border-radius:8px;cursor:pointer;transition:border-color .2s}
+  .cart-btn:hover{border-color:#555}
+  .cart-count{position:absolute;top:-8px;right:-8px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--red);color:#fff;
+    font-family:var(--fb);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:.2s}
+  .cart-count.show{opacity:1;transform:none}
+  @media(max-width:820px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#111,var(--ink))}
+  .hero-txt{padding:64px 48px 64px 24px;max-width:640px;margin-left:auto}
+  .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .chip{font-family:var(--fd);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:5px 13px}
+  .chip.hot{color:var(--red);border-color:rgba(193,18,31,.45)}
+  h1.hero-h1{font-family:var(--fd);font-weight:900;line-height:.94;text-transform:uppercase;font-size:clamp(42px,6vw,74px);letter-spacing:-.01em;margin-bottom:18px}
+  h1.hero-h1 em{font-style:normal;color:var(--red)}
+  .hero-sub{color:var(--muted);font-size:16.5px;max-width:46ch;margin-bottom:30px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .hero-proof{margin-top:28px;display:flex;gap:22px;flex-wrap:wrap;color:var(--muted-2);font-size:13.5px}
+  .hero-proof b{color:var(--fg)}
+  .hero-media{position:relative;background:#0b0b0c;overflow:hidden;min-height:440px}
+  .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,15,.85),transparent 30%),linear-gradient(0deg,rgba(14,14,15,.4),transparent 40%)}
+  @media(max-width:820px){.hero{grid-template-columns:1fr}.hero-media{order:-1;min-height:300px}.hero-txt{padding:40px 24px 48px;margin:0;max-width:none}}
+
+  /* TRUST */
+  .trust{background:var(--panel);border-bottom:1px solid var(--line)}
+  .trust-in{display:grid;grid-template-columns:repeat(4,1fr);max-width:var(--wrap);margin:0 auto}
+  .trust-i{display:flex;gap:12px;align-items:center;padding:18px 22px;border-right:1px solid var(--line)}
+  .trust-i:last-child{border-right:none}
+  .trust-i svg{width:26px;height:26px;color:var(--red);flex-shrink:0}
+  .trust-i b{display:block;font-family:var(--fd);font-size:15px;font-weight:700}
+  .trust-i span{font-size:12.5px;color:var(--muted)}
+  @media(max-width:720px){.trust-in{grid-template-columns:1fr 1fr}.trust-i:nth-child(even){border-right:none}.trust-i:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+  section{padding:74px 0}
+  .sec-head{margin-bottom:34px}
+
+  /* CATÁLOGO */
+  .cat-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(272px,1fr);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+  @media(min-width:1000px){.cat-track{grid-template-columns:repeat(4,1fr);grid-auto-flow:row;overflow:visible}}
+  .pcard{scroll-snap-align:start;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+  .pcard:hover{border-color:#3a3a3d;transform:translateY(-3px)}
+  .pcard-media{position:relative;aspect-ratio:1/1;background:#0e0e0f;overflow:hidden;cursor:pointer}
+  .pcard-media img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .pcard:hover .pcard-media img{transform:scale(1.04)}
+  .pcard-tag{position:absolute;top:10px;left:10px;background:rgba(14,14,15,.82);border:1px solid var(--line);border-left:2px solid var(--red);
+    font-family:var(--fd);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:4px}
+  .pcard-ship{position:absolute;top:10px;right:10px;background:rgba(30,168,92,.9);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:4px}
+  .pcard-vid{position:absolute;bottom:10px;right:10px;background:rgba(14,14,15,.78);border:1px solid var(--line);border-radius:20px;font-size:11px;color:var(--fg);padding:4px 10px;display:flex;align-items:center;gap:5px}
+  .pcard-vid svg{width:12px;height:12px}
+  .pcard-body{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
+  .pcard-name{font-family:var(--fd);font-size:21px;font-weight:700;text-transform:uppercase;line-height:1;margin-bottom:4px}
+  .pcard-desc{font-size:13px;color:var(--muted);margin-bottom:14px;min-height:38px}
+  .pcard-foot{margin-top:auto}
+  .pcard-price .money{font-size:26px}
+  .pcard-price small{display:block;font-size:11px;color:var(--muted-2);letter-spacing:.04em}
+  .pcard-btns{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+  .pcard-btns .btn{font-size:14px;padding:12px 14px;width:100%}
+
+  /* MODAL DETALLE */
+  .modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .25s}
+  .modal.open{opacity:1;visibility:visible}
+  .modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;width:min(940px,100%);max-height:92vh;overflow:auto;display:grid;grid-template-columns:1fr 1fr;transform:translateY(14px);transition:transform .25s}
+  .modal.open .modal-box{transform:none}
+  .modal-gallery{background:#0b0b0c;display:flex;flex-direction:column}
+  .mg-main{position:relative;aspect-ratio:1/1;background:#0b0b0c}
+  .mg-main img,.mg-main video{width:100%;height:100%;object-fit:cover}
+  .mg-thumbs{display:flex;gap:8px;padding:12px;overflow-x:auto}
+  .mg-thumb{flex:0 0 56px;height:56px;border-radius:8px;overflow:hidden;border:2px solid transparent;cursor:pointer;position:relative;background:#000}
+  .mg-thumb img{width:100%;height:100%;object-fit:cover}
+  .mg-thumb.active{border-color:var(--red)}
+  .mg-thumb .vbadge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35)}
+  .mg-thumb .vbadge svg{width:16px;height:16px;color:#fff}
+  .modal-info{padding:26px 26px 30px;position:relative}
+  .modal-close{position:absolute;top:12px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--fg);font-size:22px;cursor:pointer;line-height:1;z-index:3}
+  .modal-name{font-family:var(--fd);font-size:30px;font-weight:800;text-transform:uppercase;line-height:1;margin-bottom:8px}
+  .modal-price{display:flex;align-items:baseline;gap:8px;margin:6px 0 16px;flex-wrap:wrap}
+  .modal-price .money{font-size:34px;color:#fff}
+  .modal-desc{color:var(--muted);font-size:14.5px;margin-bottom:8px}
+  .ship-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:4px 10px;border-radius:20px;margin-bottom:8px}
+  .ship-free{background:rgba(30,168,92,.15);color:#37d07f;border:1px solid rgba(30,168,92,.4)}
+  .ship-coord{background:rgba(200,168,75,.12);color:var(--gold);border:1px solid rgba(200,168,75,.35)}
+  .modal-block-t{font-family:var(--fd);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:18px 0 10px}
+  .spec-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .spec-row span:first-child{color:var(--muted)}
+  .spec-row span:last-child{font-family:var(--fd);font-weight:700;text-align:right}
+  .inc-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .inc-list li{display:flex;gap:9px;font-size:13.5px}
+  .inc-list li svg{width:16px;height:16px;color:var(--green);flex-shrink:0;margin-top:3px}
+  /* selector tamaño */
+  .size-opts{display:flex;gap:8px;flex-wrap:wrap}
+  .size-opts label{border:1px solid var(--line);border-radius:8px;padding:9px 16px;cursor:pointer;font-family:var(--fd);font-weight:700;text-transform:uppercase;font-size:14px;color:var(--muted);user-select:none;transition:.2s}
+  .size-opts input{display:none}
+  .size-opts label.sel{border-color:var(--red);color:#fff;background:rgba(193,18,31,.1)}
+  /* accesorios combo */
+  .acc-list{display:flex;flex-direction:column;gap:8px}
+  .acc{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:9px;padding:12px 14px;cursor:pointer;transition:.2s}
+  .acc.on{border-color:var(--green);background:rgba(30,168,92,.06)}
+  .acc.base{border-color:var(--line);background:#101012;cursor:default}
+  .acc input{width:19px;height:19px;accent-color:var(--green);flex-shrink:0}
+  .acc-thumb{width:46px;height:46px;border-radius:7px;object-fit:cover;background:#0e0e0f;flex-shrink:0;border:1px solid var(--line);cursor:zoom-in}
+  .acc-info{flex:1}
+  .acc-name{font-size:14px;font-weight:600}
+  .acc-tagfix{font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.05em}
+  .acc-price{font-family:var(--fd);font-weight:800;font-size:16px;white-space:nowrap}
+  .modal-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .modal-actions .btn{flex:1;min-width:150px}
+  @media(max-width:760px){.modal-box{grid-template-columns:1fr;max-height:94vh}}
+
+  /* BENEFICIOS */
+  .bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.bg-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.bg-grid{grid-template-columns:1fr}}
+  .bcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .bcard svg{width:28px;height:28px;color:var(--red);margin-bottom:12px}
+  .bcard h3{font-family:var(--fd);font-size:19px;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+  .bcard p{font-size:13.5px;color:var(--muted)}
+
+  /* LIFESTYLE BAND */
+  .life{padding:0}
+  .life-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
+  @media(max-width:760px){.life-grid{grid-template-columns:1fr}}
+  .life-card{position:relative;aspect-ratio:4/5;overflow:hidden;background:#000}
+  .life-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .life-card:hover img{transform:scale(1.05)}
+  .life-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 55%)}
+  .life-cap{position:absolute;left:20px;bottom:18px;right:20px;z-index:2}
+  .life-cap .k{font-family:var(--fd);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
+  .life-cap h4{font-family:var(--fd);font-size:24px;font-weight:800;text-transform:uppercase;line-height:1;margin-top:4px}
+  .life-cap p{font-size:13px;color:#cfcfcf;margin-top:6px}
+
+  /* GARANTÍA */
+  .assure{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .assure-in{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:720px){.assure-in{grid-template-columns:1fr}}
+  .acard{display:flex;gap:14px;align-items:flex-start}
+  .acard svg{width:30px;height:30px;color:var(--red);flex-shrink:0}
+  .acard b{font-family:var(--fd);font-size:18px;text-transform:uppercase;display:block}
+  .acard p{font-size:13.5px;color:var(--muted)}
+
+  /* COTIZACIÓN */
+  .quote{position:relative;overflow:hidden;border-top:1px solid var(--line)}
+  .quote-bg{position:absolute;inset:0;z-index:0}
+  .quote-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.28) saturate(1.1)}
+  .quote-in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  @media(max-width:820px){.quote-in{grid-template-columns:1fr;gap:26px}}
+  .quote-form{background:rgba(20,20,21,.9);border:1px solid var(--line);border-radius:16px;padding:26px}
+  .qf-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .qf-grid .full{grid-column:1/-1}
+  @media(max-width:480px){.qf-grid{grid-template-columns:1fr}}
+  .field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:5px}
+  .field label .req{color:var(--red)}
+  .field input,.field textarea,.field select{width:100%;background:#0e0e0f;border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--fg);font-family:var(--fb);font-size:15px;transition:border-color .2s}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--red)}
+  .field input.err,.field select.err{border-color:#ff5b5b;background:rgba(255,91,91,.05)}
+  .field textarea{resize:vertical;min-height:70px}
+
+  /* FOOTER */
+  footer{background:#0a0a0b;border-top:1px solid var(--line);padding:44px 0 28px}
+  .foot-in{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+  @media(max-width:720px){.foot-in{grid-template-columns:1fr;text-align:center}}
+  .foot-logo img{height:56px;margin-bottom:12px}
+  .foot-tag{font-size:13px;color:var(--muted)}
+  .foot-col h4{font-family:var(--fd);font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin-bottom:12px}
+  .foot-col a{display:block;color:var(--muted);font-size:14px;padding:4px 0}
+  .foot-col a:hover{color:var(--fg)}
+  .socials{display:flex;gap:10px;margin-top:12px}
+  @media(max-width:720px){.socials{justify-content:center}}
+  .soc{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--line);border-radius:9px;color:var(--muted);transition:.2s}
+  .soc svg{width:19px;height:19px}
+  .soc:hover{color:#fff;border-color:var(--red);background:rgba(193,18,31,.1)}
+  .foot-bottom{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;text-align:center;font-size:12.5px;color:var(--muted-2)}
+
+  /* WA FLOAT + MOBILE BAR */
+  .wa-float{position:fixed;right:20px;bottom:20px;z-index:120;width:56px;height:56px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(30,168,92,.4)}
+  .wa-float svg{width:30px;height:30px;color:#fff}
+  @media(max-width:640px){.wa-float{bottom:78px}}
+  .mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:110;background:rgba(12,12,13,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));align-items:center;gap:12px}
+  .mobile-bar .mb-total{display:flex;flex-direction:column;line-height:1.05}
+  .mobile-bar .mb-total span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .mobile-bar .mb-total strong{font-family:var(--fd);font-size:20px}
+  .mobile-bar .btn{flex:1}
+  @media(max-width:640px){.mobile-bar{display:flex}}
+
+  /* ============ CARRITO (rediseñado: modal + resumen) ============ */
+  .cart-modal{position:fixed;inset:0;z-index:320;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity .25s}
+  .cart-modal.open{opacity:1;visibility:visible}
+  .cart-shell{background:var(--panel);border:1px solid var(--line);border-radius:18px;width:min(960px,100%);max-height:92vh;display:flex;flex-direction:column;overflow:hidden;transform:translateY(14px);transition:transform .25s}
+  .cart-modal.open .cart-shell{transform:none}
+  .cart-top{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--line)}
+  .cart-top h3{font-family:var(--fd);font-size:24px;font-weight:800;text-transform:uppercase}
+  .cart-top button{background:none;border:none;color:var(--fg);font-size:28px;cursor:pointer;line-height:1}
+  .cart-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:0;overflow:hidden;flex:1;min-height:0}
+  @media(max-width:760px){.cart-grid{grid-template-columns:1fr}}
+  .cart-items{overflow-y:auto;padding:18px 24px}
+  .cart-summary{background:#101012;border-left:1px solid var(--line);padding:22px 24px;display:flex;flex-direction:column;overflow-y:auto}
+  @media(max-width:760px){.cart-summary{border-left:none;border-top:1px solid var(--line)}}
+  .cart-empty{text-align:center;color:var(--muted);padding:56px 20px}
+  .cart-empty svg{width:46px;height:46px;color:var(--muted-2);margin-bottom:12px}
+  .citem{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .citem-img{width:82px;height:82px;border-radius:10px;object-fit:cover;background:#0e0e0f;flex-shrink:0}
+  .citem-mid{flex:1;min-width:0}
+  .citem-name{font-family:var(--fd);font-size:18px;font-weight:700;text-transform:uppercase;line-height:1.05}
+  .citem-cfg{font-size:12px;color:var(--muted);margin-top:3px}
+  .citem-cfg .edit{color:var(--gold);text-decoration:underline;cursor:pointer;margin-left:6px}
+  .citem-ship{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:5px}
+  .citem-ship.free{color:#37d07f}.citem-ship.coord{color:var(--gold)}
+  .citem-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:10px}
+  .citem-qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .citem-qty button{width:32px;height:32px;background:#232326;border:none;color:#fff;font-size:18px;cursor:pointer}
+  .citem-qty button:active{background:var(--red)}
+  .citem-qty span{width:36px;text-align:center;font-family:var(--fd);font-weight:700}
+  .citem-line{font-family:var(--fd);font-weight:800;font-size:18px}
+  .citem-del{background:none;border:none;color:var(--muted-2);font-size:12px;cursor:pointer;text-decoration:underline}
+  .citem-del:hover{color:var(--red)}
+  .sum-row{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);padding:6px 0}
+  .sum-row.total{border-top:1px solid var(--line);margin-top:8px;padding-top:14px;color:var(--fg)}
+  .sum-row.total .money{font-family:var(--fd);font-size:30px;font-weight:900;color:var(--gold)}
+  .sum-ship{font-size:12.5px;color:var(--muted-2);margin:10px 0 16px;line-height:1.5}
+  .cart-summary .btn{width:100%}
+  .checkout{display:none;flex-direction:column;gap:11px;margin-top:14px}
+  .checkout.show{display:flex}
+  .mode-toggle{display:flex;gap:8px}
+  .mode-toggle label{flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:10px;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--muted);user-select:none;transition:.2s}
+  .mode-toggle input{display:none}
+  .mode-toggle label.sel{border-color:var(--red);color:#fff;background:rgba(193,18,31,.08)}
+  .back-cart{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;text-align:left;padding:0;text-decoration:underline}
+
+  .zoomable{cursor:zoom-in}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="nav-logo" href="#top" aria-label="FMR Colombia"><img src="assets/logo.png" alt="FMR Colombia"></a>
+    <nav class="nav-links">
+      <a href="#catalogo">Productos</a>
+      <a href="#beneficios">Por qué FMR</a>
+      <a href="#cotizar">Cotizar</a>
+    </nav>
+    <button class="cart-btn" id="openCart" aria-label="Ver carrito">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Carrito<span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<div id="top"></div>
+<section class="hero" style="padding:0">
+  <div class="hero-txt">
+    <div class="hero-badges">
+      <span class="chip hot">Fabricado en Colombia</span>
+      <span class="chip">Aluminio CNC</span>
+      <span class="chip">Garantía 3 meses</span>
+    </div>
+    <h1 class="hero-h1">Herramientas<br>que el <em>joyero</em><br>sí respeta.</h1>
+    <p class="hero-sub">Sopletes, boquillas y bases FMR fabricados en torno CNC para joyería artesanal. Control de llama real y repuestos disponibles en el país.</p>
+    <div class="hero-cta">
+      <a href="#catalogo" class="btn btn-red btn-lg">Ver productos</a>
+      <a href="#cotizar" class="btn btn-ghost btn-lg">Pedir cotización</a>
+    </div>
+    <div class="hero-proof">
+      <div><b>+180</b> joyeros equipados</div>
+      <div><b>3–5 días</b> de entrega</div>
+      <div><b>Envío gratis</b> en sopletes*</div>
+    </div>
+  </div>
+  <div class="hero-media"><img src="assets/IMG_4182.jpg" alt="Soplete FMR para joyería"></div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="trust-in">
+    <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></svg><div><b>Fabricación CNC</b><span>Torno de control numérico</span></div></div>
+    <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z"/></svg><div><b>Hasta 1.300 °C</b><span>Control fino de la llama</span></div></div>
+    <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><b>Garantía 3 meses</b><span>Defectos de fábrica</span></div></div>
+    <div class="trust-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg><div><b>Envío nacional</b><span>A todo Colombia</span></div></div>
+  </div>
+</div>
+
+<!-- CATÁLOGO -->
+<section id="catalogo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Catálogo</div>
+      <h2 class="title">Elige tu herramienta</h2>
+      <p class="lead">Cada producto con sus fotos, video y ficha técnica. Añádelo al carrito y arma tu pedido en un solo mensaje de WhatsApp.</p>
+    </div>
+    <div class="cat-track" id="catTrack"></div>
+  </div>
+</section>
+
+<!-- LIFESTYLE -->
+<section class="life">
+  <div class="life-grid">
+    <div class="life-card"><img src="assets/life-llama.jpg" alt="Llama del soplete FMR"><div class="life-cap"><div class="k">Llama estable</div><h4>Fuego que obedece</h4><p>Dardo azul parejo de 400 a 1.300 °C.</p></div></div>
+    <div class="life-card"><img src="assets/life-fuego.jpg" alt="Soldando una pieza"><div class="life-cap"><div class="k">En el banco</div><h4>Suelda y funde</h4><p>Filigrana, cadenas, recocido y reparación.</p></div></div>
+    <div class="life-card"><img src="assets/life-boquilla.jpg" alt="Boquillas intercambiables"><div class="life-cap"><div class="k">3 boquillas</div><h4>Cada trabajo, su pico</h4><p>Cambio rápido entre chica, mediana y grande.</p></div></div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios" style="background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Por qué FMR</div><h2 class="title">Pensado para tu banco de trabajo</h2></div>
+    <div class="bg-grid">
+      <div class="bcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><h3>Control de gas fino</h3><p>Válvula de aguja de doble asiento: regulás la llama al detalle, sin oscilaciones ni desperdicio.</p></div>
+      <div class="bcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20l6-6M14 4l6 6M9 9l6 6"/></svg><h3>3 boquillas incluidas</h3><p>Chica, mediana y grande. Llegás a puntos de soldadura que un soplete de una sola boquilla no alcanza.</p></div>
+      <div class="bcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 12h18M3 6h18M3 18h18"/></svg><h3>Llama estable</h3><p>Flujo laminar: temperatura pareja de 400 a 1.300 °C, ideal para filigrana, cadenas y recocido.</p></div>
+      <div class="bcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg><h3>Cuerpo en aluminio</h3><p>Torneado CNC, ligero y resistente al calor. Horas de trabajo sin fatiga en la mano.</p></div>
+      <div class="bcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16M4 12a4 4 0 0 1 4-4M20 12a4 4 0 0 0-4-4"/></svg><h3>Conector universal</h3><p>Compatible con garrafas de 2/3 kg y de 10 kg o más, sin adaptadores adicionales.</p></div>
+      <div class="bcard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg><h3>Repuestos en Colombia</h3><p>Somos fabricantes: conseguís boquillas, mangueras y soporte técnico sin importar nada.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GARANTÍA -->
+<section class="assure" style="padding:44px 0">
+  <div class="wrap assure-in">
+    <div class="acard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Garantía real</b><p>3 meses por defectos de fábrica. Somos el fabricante, no un revendedor.</p></div></div>
+    <div class="acard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div><b>Soporte por WhatsApp</b><p>Te asesoramos con la instalación, el gas y el mantenimiento del equipo.</p></div></div>
+    <div class="acard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg><div><b>Envío gratis en sopletes</b><p>Y en la base giratoria en combo completo. Despacho en 3–5 días hábiles.*</p></div></div>
+  </div>
+</section>
+
+<!-- COTIZACIÓN -->
+<section class="quote" id="cotizar">
+  <div class="quote-bg"><img src="assets/life-fuego.jpg" alt=""></div>
+  <div class="wrap quote-in">
+    <div>
+      <div class="eyebrow">Cotización</div>
+      <h2 class="title">¿Dudas antes de comprar?</h2>
+      <p class="lead">Déjanos tus datos y qué producto te interesa. Te enviamos precio, disponibilidad y formas de pago por WhatsApp. Sin compromiso.</p>
+      <div class="hero-proof" style="margin-top:22px">
+        <div><b>Respuesta</b> el mismo día</div>
+        <div><b>Asesoría</b> técnica real</div>
+      </div>
+    </div>
+    <form class="quote-form" id="quoteForm" novalidate>
+      <div class="qf-grid">
+        <div class="field"><label>Nombre <span class="req">*</span></label><input type="text" name="qnombre" autocomplete="name" placeholder="Tu nombre"></div>
+        <div class="field"><label>WhatsApp <span class="req">*</span></label><input type="tel" name="qtel" inputmode="tel" autocomplete="tel" placeholder="Ej: 315 952 4569"></div>
+        <div class="field"><label>Ciudad</label><input type="text" name="qciudad" autocomplete="address-level2" placeholder="Ej: Cúcuta"></div>
+        <div class="field"><label>Producto de interés <span class="req">*</span></label>
+          <select name="qproducto">
+            <option value="">Elegí una opción…</option>
+            <option>Soplete Negro</option>
+            <option>Soplete Rojo</option>
+            <option>Soplete Plata</option>
+            <option>Boquillas</option>
+            <option>Base Giratoria (combo)</option>
+            <option>Varios / no estoy seguro</option>
+          </select>
+        </div>
+        <div class="field full"><label>Mensaje (opcional)</label><textarea name="qmsg" placeholder="Cantidad, dudas, etc."></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-wa" style="width:100%;margin-top:6px">Enviar cotización por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-in">
+    <div>
+      <div class="foot-logo"><img src="assets/logo.png" alt="FMR Colombia"></div>
+      <p class="foot-tag">#SomosTuHerramienta<br>Sopletes y herramientas para joyería artesanal, fabricados en Colombia.</p>
+    </div>
+    <div class="foot-col"><h4>Productos</h4><a href="#catalogo">Sopletes FMR</a><a href="#catalogo">Boquillas</a><a href="#catalogo">Base giratoria</a><a href="#cotizar">Cotizar</a></div>
+    <div class="foot-col"><h4>Contacto</h4>
+      <a href="https://wa.me/573159524569">WhatsApp 315 952 4569</a>
+      <a href="mailto:ventas@fmrcolombia.com" data-social="email">ventas@fmrcolombia.com</a>
+      <a href="#catalogo">Hacer un pedido</a>
+      <div class="socials">
+        <a class="soc" href="https://facebook.com/fmrcolombia" target="_blank" rel="noopener" aria-label="Facebook" data-social="facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7v3h2.8v8z"/></svg></a>
+        <a class="soc" href="https://instagram.com/fmrcolombia" target="_blank" rel="noopener" aria-label="Instagram" data-social="instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+        <a class="soc" href="mailto:ventas@fmrcolombia.com" aria-label="Correo" data-social="email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+      </div>
+      <p class="foot-tag" style="margin-top:12px">Garantía 3 meses de fábrica<br>Envío a todo Colombia</p>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 FMR Colombia · #SomosTuHerramienta · Todos los derechos reservados</div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/573159524569?text=Hola%20FMR%2C%20quiero%20informaci%C3%B3n" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.06 24l1.7-6.2a11.9 11.9 0 1 1 4.5 4.4L.06 24zM6.6 20l.4.2a9.9 9.9 0 1 0-3.4-3.4l.2.4-1 3.7 3.8-1zM17.5 14.3c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.7-.3-1.4-.7-2-1.3-.5-.5-.9-1.1-1.3-1.7-.1-.2 0-.4.1-.5l.4-.5c.1-.1.1-.3.2-.4 0-.1 0-.3 0-.4 0-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.7.6-1 1.5-1 2.4.1 1.1.5 2.1 1.2 3 1.3 1.9 3 3.3 5.1 4 .5.2 1 .4 1.6.4.6.1 1.2 0 1.7-.3.5-.3 1-.9 1.1-1.4.1-.3.1-.6 0-.7z"/></svg></a>
+
+<div class="mobile-bar">
+  <div class="mb-total"><span>Total</span><strong id="mbTotal">$0</strong></div>
+  <button class="btn btn-red" id="mbCart">Ver carrito</button>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal" id="pModal" aria-hidden="true">
+  <div class="modal-box">
+    <div class="modal-gallery">
+      <div class="mg-main" id="mgMain"></div>
+      <div class="mg-thumbs" id="mgThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <button class="modal-close" id="pClose" aria-label="Cerrar">&times;</button>
+      <div class="eyebrow" id="mTag"></div>
+      <div class="modal-name" id="mName"></div>
+      <div id="mShip"></div>
+      <div class="modal-price"><span class="money" id="mPrice"></span></div>
+      <p class="modal-desc" id="mDesc"></p>
+      <div id="mConfig"></div>
+      <div id="mSpecsWrap"><div class="modal-block-t">Ficha técnica</div><div id="mSpecs"></div></div>
+      <div id="mIncWrap"><div class="modal-block-t">Qué incluye</div><ul class="inc-list" id="mInc"></ul></div>
+      <div class="modal-actions">
+        <button class="btn btn-red" id="mAdd">Agregar al carrito</button>
+        <a class="btn btn-wa" id="mWa" href="#">Consultar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARRITO -->
+<div class="cart-modal" id="cartModal" aria-hidden="true">
+  <div class="cart-shell">
+    <div class="cart-top"><h3>Tu carrito</h3><button id="cartClose" aria-label="Cerrar">&times;</button></div>
+    <div class="cart-grid">
+      <div class="cart-items" id="cartItems"></div>
+      <aside class="cart-summary" id="cartSummary">
+        <div id="sumLines"></div>
+        <p class="sum-ship" id="sumShip"></p>
+        <button class="btn btn-red" id="goCheckout">Continuar pedido</button>
+        <form class="checkout" id="checkoutForm" novalidate>
+          <button type="button" class="back-cart" id="backCart">‹ Volver al carrito</button>
+          <div class="mode-toggle">
+            <label class="sel"><input type="radio" name="modo" value="comprar" checked> Comprar ahora</label>
+            <label><input type="radio" name="modo" value="cotizar"> Solo cotizar</label>
+          </div>
+          <div class="field"><label>Nombre completo <span class="req">*</span></label><input type="text" name="nombre" autocomplete="name" placeholder="Ej: Carlos Rodríguez"></div>
+          <div class="field"><label>WhatsApp / Teléfono <span class="req">*</span></label><input type="tel" name="tel" inputmode="tel" autocomplete="tel" placeholder="Ej: 315 952 4569"></div>
+          <div class="field"><label>Ciudad <span class="req">*</span></label><input type="text" name="ciudad" autocomplete="address-level2" placeholder="Ej: Cúcuta"></div>
+          <div class="field" id="dirField"><label>Dirección de envío <span class="req">*</span></label><input type="text" name="direccion" autocomplete="street-address" placeholder="Calle, número, barrio"></div>
+          <div class="field"><label>Notas (opcional)</label><textarea name="notas" placeholder="Método de pago, dudas, etc."></textarea></div>
+          <button type="submit" class="btn btn-wa">Enviar pedido por WhatsApp</button>
+          <div class="pay-sep"><span>o paga en línea</span></div>
+          <button type="button" class="btn btn-mp" id="payMP">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:18px;height:18px"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            Pagar con MercadoPago
+          </button>
+          <p class="pay-note" id="mpNote">Pago en línea — se activa al vincular el token de MercadoPago.</p>
+        </form>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="modal" id="lightbox" aria-hidden="true" style="background:rgba(0,0,0,.94);z-index:400">
+  <button class="modal-close" id="lbClose" style="top:18px;right:20px">&times;</button>
+  <img id="lbImg" src="" alt="" style="max-width:92%;max-height:90vh;object-fit:contain;border-radius:10px">
+</div>
+
+<script>
+/* =====================================================================
+   FMR Colombia — catálogo, boquillas por tamaño, base combo, carrito
+   >>> EDITA AQUÍ precios, textos y media de cada producto <<<
+   ===================================================================== */
+(function(){
+  var WA='573159524569';
+  var COP=function(n){return '$'+Number(n).toLocaleString('es-CO');};
+
+  /* ===== MERCADOPAGO — pegá aquí los datos cuando los tengas ===== */
+  /* Opción simple (sin backend): un "Link de pago" de MercadoPago. Pegalo en MP_LINK. */
+  /* Opción avanzada (Checkout Pro/Bricks): requiere public key + preferencia desde tu cuenta. */
+  var MP_LINK   = '';   // ej: 'https://mpago.la/xxxxxxx'  ← link de pago de MercadoPago
+  var MP_PUBLIC_KEY = ''; // ej: 'APP_USR-xxxxxxxx' (solo si usás Checkout Bricks)
+  /* ============================================================== */
+
+  var SPECS_SOPLETE=[
+    ['Temperatura','400 – 1.300 °C'],['Tipo de gas','Butano / Propano'],
+    ['Boquillas incluidas','3 — chica, mediana, grande'],['Manguera','1,25 m alta presión'],
+    ['Cuerpo','Aluminio CNC'],['Válvula','Aguja doble asiento'],
+    ['Metales','Oro · Plata · Platino · Alpaca · Bronce']
+  ];
+  var INC_SOPLETE=[
+    'Soplete con cuerpo torneado CNC',
+    '3 boquillas intercambiables (chica, mediana, grande)',
+    'Manguera de alta presión de 1,25 m con sistema antitorsión',
+    'Conector universal (garrafa 2/3 kg y 10 kg+)',
+    'Soporte para banco de trabajo',
+    'Kit butano + garrafita para empezar el mismo día',
+    'Caja protectora + manual de instrucciones'
+  ];
+  var DEMOS=[
+    {t:'video',src:'assets/video/IMG_0956.mp4',poster:'assets/video/IMG_0956.jpg'}, // fuego
+    {t:'video',src:'assets/video/IMG_0959.mp4',poster:'assets/video/IMG_0959.jpg'}, // soldando cobre
+    {t:'video',src:'assets/video/IMG_0949.mp4',poster:'assets/video/IMG_0949.jpg'}  // conector
+  ];
+
+  var PRODUCTS=[
+    { id:'soplete-negro', type:'simple', tag:'Soplete · Negro', name:'Soplete FMR Negro',
+      price:500000, freeShip:true,
+      desc:'Acabado negro mate con cabezal dorado. Incluye 3 boquillas intercambiables (chica, mediana y grande).',
+      thumb:'assets/IMG_4182.jpg',
+      media:[{t:'img',src:'assets/IMG_4182.jpg'},
+             {t:'video',src:'assets/video/IMG_0956.mp4',poster:'assets/video/IMG_0956.jpg'},
+             {t:'video',src:'assets/video/IMG_0952.mp4',poster:'assets/video/IMG_0952.jpg'},
+             {t:'video',src:'assets/video/IMG_0953.mp4',poster:'assets/video/IMG_0953.jpg'},
+             {t:'video',src:'assets/video/IMG_0959.mp4',poster:'assets/video/IMG_0959.jpg'}],
+      specs:SPECS_SOPLETE, includes:INC_SOPLETE },
+
+    { id:'soplete-rojo', type:'simple', tag:'Soplete · Rojo', name:'Soplete FMR Rojo',
+      price:570000, freeShip:true,
+      desc:'Cuerpo en rojo anodizado con cabezal dorado. Incluye 3 boquillas intercambiables (chica, mediana y grande).',
+      thumb:'assets/IMG_4187.jpg',
+      media:[{t:'img',src:'assets/IMG_4187.jpg'},
+             {t:'video',src:'assets/video/IMG_0963.mp4',poster:'assets/video/IMG_0963.jpg'}].concat(DEMOS),
+      specs:SPECS_SOPLETE, includes:INC_SOPLETE },
+
+    { id:'soplete-plata', type:'simple', tag:'Soplete · Plata', name:'Soplete FMR Plata',
+      price:570000, freeShip:true,
+      desc:'Cuerpo en aluminio pulido (plata) con cabezal dorado. Incluye 3 boquillas intercambiables (chica, mediana y grande).',
+      thumb:'assets/IMG_4181.jpg',
+      media:[{t:'img',src:'assets/IMG_4181.jpg'}].concat(DEMOS),
+      specs:SPECS_SOPLETE, includes:INC_SOPLETE },
+
+    { id:'boquillas', type:'sized', tag:'Repuesto', name:'Boquillas FMR',
+      price:50000, freeShip:false,
+      sizes:['Pequeña','Mediana','Grande'],
+      desc:'Boquillas de repuesto en latón torneado CNC. Elegí el tamaño. Precio por unidad.',
+      thumb:'assets/boquillas.jpg',
+      media:[{t:'img',src:'assets/boquillas.jpg'},
+             {t:'video',src:'assets/video/IMG_0952.mp4',poster:'assets/video/IMG_0952.jpg'},
+             {t:'video',src:'assets/video/IMG_0956.mp4',poster:'assets/video/IMG_0956.jpg'}],
+      specs:[['Material','Latón CNC'],['Tamaños','Chica · Mediana · Grande'],['Compatibilidad','Sopletes FMR'],['Precio','Por unidad']],
+      includes:['1 boquilla del tamaño elegido'] },
+
+    { id:'base-giratoria', type:'combo', tag:'Combo · Taller', name:'Base Giratoria FMR',
+      basePrice:120000, baseName:'Base giratoria', freeShip:false,
+      accessories:[
+        {id:'mano-magica', name:'Mano mágica', price:150000, img:'assets/acc-mano-magica.jpg'},
+        {id:'payones',     name:'Base de payones', price:70000, img:'assets/acc-payones.jpg'},
+        {id:'multiapoyo',  name:'Base multiapoyo', price:65000, img:'assets/acc-multiapoyo.jpg'}
+      ],
+      desc:'Base giratoria con piedra refractaria (gira 360°). Armá tu combo agregando accesorios. Envío gratis con el combo completo.',
+      thumb:'assets/IMG_4185.jpg',
+      media:[{t:'img',src:'assets/IMG_4185.jpg'},
+             {t:'video',src:'assets/video/IMG_0968.mp4',poster:'assets/video/IMG_0968.jpg'},
+             {t:'video',src:'assets/video/IMG_0957.mp4',poster:'assets/video/IMG_0957.jpg'}],
+      specs:[['Movimiento','Giro 360°'],['Superficie','Piedra refractaria'],['Material base','Acero / hierro fundido'],['Uso','Soldadura y armado de piezas']],
+      includes:['Base giratoria con piedra refractaria','Accesorios que elijas en el combo'] }
+  ];
+  var byId={}; PRODUCTS.forEach(function(p){byId[p.id]=p;});
+
+  var icoPlay='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  var icoCheck='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+
+  /* precio "desde" para tarjeta */
+  function cardPrice(p){
+    if(p.type==='combo') return {main:'Desde '+COP(p.basePrice), sub:'Combo completo '+COP(comboFull(p))};
+    if(p.type==='sized') return {main:COP(p.price), sub:'Por unidad'};
+    return {main:COP(p.price), sub:p.freeShip?'Envío gratis':''};
+  }
+  function comboFull(p){ return p.basePrice + p.accessories.reduce(function(s,a){return s+a.price;},0); }
+
+  /* ---------- CATÁLOGO ---------- */
+  var track=document.getElementById('catTrack');
+  PRODUCTS.forEach(function(p){
+    var nVids=p.media.filter(function(m){return m.t==='video';}).length;
+    var cp=cardPrice(p);
+    var card=document.createElement('article'); card.className='pcard';
+    card.innerHTML=
+      '<div class="pcard-media" data-open="'+p.id+'">'+
+        '<img src="'+p.thumb+'" alt="'+p.name+'" loading="lazy">'+
+        '<span class="pcard-tag">'+p.tag+'</span>'+
+        (p.freeShip?'<span class="pcard-ship">Envío gratis</span>':'')+
+        (nVids?'<span class="pcard-vid">'+icoPlay+nVids+' video'+(nVids>1?'s':'')+'</span>':'')+
+      '</div>'+
+      '<div class="pcard-body">'+
+        '<div class="pcard-name">'+p.name+'</div>'+
+        '<div class="pcard-desc">'+p.desc.slice(0,84)+(p.desc.length>84?'…':'')+'</div>'+
+        '<div class="pcard-foot"><div class="pcard-price"><span class="money">'+cp.main+'</span>'+(cp.sub?'<small>'+cp.sub+'</small>':'')+'</div>'+
+          '<div class="pcard-btns">'+
+            '<button class="btn btn-red" data-open="'+p.id+'">'+(p.type==='simple'?'Comprar':'Configurar')+'</button>'+
+            '<button class="btn btn-ghost" data-open="'+p.id+'">Ver detalle</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    track.appendChild(card);
+  });
+
+  /* ---------- MODAL DETALLE ---------- */
+  var modal=document.getElementById('pModal'), mgMain=document.getElementById('mgMain'), mgThumbs=document.getElementById('mgThumbs');
+  var mTag=document.getElementById('mTag'), mName=document.getElementById('mName'), mShip=document.getElementById('mShip'),
+      mPrice=document.getElementById('mPrice'), mDesc=document.getElementById('mDesc'), mConfig=document.getElementById('mConfig'),
+      mSpecs=document.getElementById('mSpecs'), mInc=document.getElementById('mInc'), mAdd=document.getElementById('mAdd'), mWa=document.getElementById('mWa');
+  var current=null, cfgState=null;
+
+  function shipBadge(free){ return free
+    ? '<span class="ship-badge ship-free">'+icoCheck+' Envío gratis</span>'
+    : '<span class="ship-badge ship-coord">Envío a coordinar</span>'; }
+
+  function livePrice(){
+    var p=current;
+    if(p.type==='combo'){ return p.basePrice + p.accessories.reduce(function(s,a){return s + (cfgState.acc[a.id]?a.price:0);},0); }
+    return p.price;
+  }
+  function comboIsFull(){ return current.accessories.every(function(a){return cfgState.acc[a.id];}); }
+  function lineFree(p,cfg){ if(p.type==='combo'){ return p.accessories.every(function(a){return cfg.acc[a.id];}); } return !!p.freeShip; }
+
+  function refreshModalDynamic(){
+    var p=current;
+    mPrice.textContent=COP(livePrice());
+    var free = p.type==='combo' ? comboIsFull() : !!p.freeShip;
+    mShip.innerHTML=shipBadge(free);
+  }
+
+  function showMedia(m){
+    var v=mgMain.querySelector('video'); if(v)v.pause();
+    if(m.t==='video'){ mgMain.innerHTML='<video src="'+m.src+'" poster="'+(m.poster||'')+'" controls playsinline preload="metadata"></video>'; }
+    else { mgMain.innerHTML='<img src="'+m.src+'" class="zoomable" alt="">'; mgMain.querySelector('img').addEventListener('click',function(){openLightbox(m.src);}); }
+  }
+
+  function buildConfig(p){
+    if(p.type==='sized'){
+      cfgState={size:p.sizes[0]};
+      mConfig.innerHTML='<div class="modal-block-t">Elegí el tamaño</div><div class="size-opts" id="sizeOpts">'+
+        p.sizes.map(function(s,i){return '<label class="'+(i===0?'sel':'')+'"><input type="radio" name="sz" value="'+s+'"'+(i===0?' checked':'')+'>'+s+'</label>';}).join('')+'</div>';
+      mConfig.querySelectorAll('#sizeOpts label').forEach(function(l){
+        l.addEventListener('click',function(){ mConfig.querySelectorAll('#sizeOpts label').forEach(function(x){x.classList.remove('sel');}); l.classList.add('sel'); cfgState.size=l.querySelector('input').value; });
+      });
+    } else if(p.type==='combo'){
+      cfgState={acc:{}}; p.accessories.forEach(function(a){cfgState.acc[a.id]=true;}); // combo completo por defecto
+      mConfig.innerHTML='<div class="modal-block-t">Armá tu combo</div><div class="acc-list" id="accList">'+
+        '<div class="acc base"><input type="checkbox" checked disabled><img class="acc-thumb" src="'+(p.thumb||'')+'" alt="'+p.baseName+'" data-zoom="'+(p.thumb||'')+'"><div class="acc-info"><div class="acc-name">'+p.baseName+'</div><div class="acc-tagfix">Incluida siempre</div></div><div class="acc-price">'+COP(p.basePrice)+'</div></div>'+
+        p.accessories.map(function(a){return '<div class="acc on" data-acc="'+a.id+'"><input type="checkbox" checked><img class="acc-thumb" src="'+(a.img||'')+'" alt="'+a.name+'" data-zoom="'+(a.img||'')+'"><div class="acc-info"><div class="acc-name">'+a.name+'</div><div class="acc-tagfix">Accesorio</div></div><div class="acc-price">+'+COP(a.price)+'</div></div>';}).join('')+
+        '</div><p class="sum-ship" style="margin-top:10px">Con el <b>combo completo</b> el envío es gratis.</p>';
+      mConfig.querySelectorAll('#accList .acc[data-acc]').forEach(function(row){
+        var id=row.getAttribute('data-acc'), cb=row.querySelector('input');
+        row.addEventListener('click',function(e){ if(e.target!==cb){ cb.checked=!cb.checked; } cfgState.acc[id]=cb.checked; row.classList.toggle('on',cb.checked); refreshModalDynamic(); });
+      });
+    } else { cfgState=null; mConfig.innerHTML=''; }
+  }
+
+  function openModal(id){
+    var p=byId[id]; if(!p)return; current=p;
+    mTag.textContent=p.tag; mName.textContent=p.name; mDesc.textContent=p.desc;
+    mSpecs.innerHTML=p.specs.map(function(s){return '<div class="spec-row"><span>'+s[0]+'</span><span>'+s[1]+'</span></div>';}).join('');
+    mInc.innerHTML=p.includes.map(function(i){return '<li>'+icoCheck+'<span>'+i+'</span></li>';}).join('');
+    buildConfig(p);
+    refreshModalDynamic();
+    mgThumbs.innerHTML='';
+    p.media.forEach(function(m,i){
+      var t=document.createElement('button'); t.className='mg-thumb'+(i===0?' active':'');
+      t.innerHTML='<img src="'+(m.t==='video'?(m.poster||''):m.src)+'" alt="">'+(m.t==='video'?'<span class="vbadge">'+icoPlay+'</span>':'');
+      t.addEventListener('click',function(){ mgThumbs.querySelectorAll('.mg-thumb').forEach(function(x){x.classList.remove('active');}); t.classList.add('active'); showMedia(m); });
+      mgThumbs.appendChild(t);
+    });
+    showMedia(p.media[0]);
+    mWa.href='https://wa.me/'+WA+'?text='+encodeURIComponent('Hola FMR 👋 Quiero información sobre: '+p.name);
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  }
+  function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; var v=mgMain.querySelector('video'); if(v)v.pause(); }
+  document.getElementById('pClose').addEventListener('click',closeModal);
+  modal.addEventListener('click',function(e){ if(e.target===modal) closeModal(); });
+
+  mAdd.addEventListener('click',function(){
+    var p=current, opts={};
+    if(p.type==='sized') opts={size:cfgState.size};
+    else if(p.type==='combo') opts={acc:current.accessories.filter(function(a){return cfgState.acc[a.id];}).map(function(a){return a.id;})};
+    addToCart(p.id,opts); closeModal(); openCart();
+  });
+
+  document.addEventListener('click',function(e){ var o=e.target.closest('[data-open]'); if(o) openModal(o.getAttribute('data-open')); });
+
+  /* ---------- CARRITO ---------- */
+  var cart=[]; // {id, qty, opts}
+  var cartModal=document.getElementById('cartModal'), cartItems=document.getElementById('cartItems'),
+      sumLines=document.getElementById('sumLines'), sumShip=document.getElementById('sumShip'),
+      cartCount=document.getElementById('cartCount'), mbTotal=document.getElementById('mbTotal'),
+      goCheckout=document.getElementById('goCheckout'), checkoutForm=document.getElementById('checkoutForm');
+
+  function optKey(id,opts){
+    var p=byId[id];
+    if(p.type==='sized') return opts.size||'';
+    if(p.type==='combo') return (opts.acc||[]).slice().sort().join(',');
+    return '';
+  }
+  function linePrice(l){
+    var p=byId[l.id];
+    if(p.type==='combo') return p.basePrice + p.accessories.filter(function(a){return l.opts.acc.indexOf(a.id)>=0;}).reduce(function(s,a){return s+a.price;},0);
+    return p.price;
+  }
+  function lineName(l){
+    var p=byId[l.id];
+    if(p.type==='sized') return p.name+' · '+l.opts.size;
+    return p.name;
+  }
+  function lineCfgText(l){
+    var p=byId[l.id];
+    if(p.type==='combo'){
+      var accs=p.accessories.filter(function(a){return l.opts.acc.indexOf(a.id)>=0;}).map(function(a){return a.name;});
+      return p.baseName+(accs.length?' + '+accs.join(' + '):' (sola)');
+    }
+    if(p.type==='sized') return 'Tamaño: '+l.opts.size;
+    return '3 boquillas incluidas';
+  }
+  function lineFreeShip(l){ var p=byId[l.id]; if(p.type==='combo') return p.accessories.every(function(a){return l.opts.acc.indexOf(a.id)>=0;}); return !!p.freeShip; }
+
+  function findLine(id,opts){ var k=optKey(id,opts); for(var i=0;i<cart.length;i++){ if(cart[i].id===id && optKey(cart[i].id,cart[i].opts)===k) return cart[i]; } return null; }
+  function addToCart(id,opts){ opts=opts||{}; var l=findLine(id,opts); if(l){l.qty++;} else {cart.push({id:id,qty:1,opts:opts});} render(); }
+  function setQty(idx,d){ var l=cart[idx]; if(!l)return; l.qty+=d; if(l.qty<=0) cart.splice(idx,1); render(); }
+  function removeIdx(idx){ cart.splice(idx,1); render(); }
+  function count(){ return cart.reduce(function(s,l){return s+l.qty;},0); }
+  function total(){ return cart.reduce(function(s,l){return s+linePrice(l)*l.qty;},0); }
+
+  function render(){
+    var c=count();
+    cartCount.textContent=c; cartCount.classList.toggle('show',c>0);
+    mbTotal.textContent=COP(total());
+    if(!cart.length){
+      cartItems.innerHTML='<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p>Tu carrito está vacío.<br>Explorá el catálogo y agregá productos.</p></div>';
+      sumLines.innerHTML=''; sumShip.textContent=''; goCheckout.style.display='none'; checkoutForm.classList.remove('show'); return;
+    }
+    goCheckout.style.display='block';
+    cartItems.innerHTML=cart.map(function(l,idx){
+      var p=byId[l.id], free=lineFreeShip(l);
+      return '<div class="citem">'+
+        '<img class="citem-img" src="'+p.thumb+'" alt="">'+
+        '<div class="citem-mid">'+
+          '<div class="citem-name">'+lineName(l)+'</div>'+
+          '<div class="citem-cfg">'+lineCfgText(l)+(p.type==='combo'?'<span class="edit" data-edit="'+l.id+'">Editar</span>':'')+'</div>'+
+          '<div class="citem-ship '+(free?'free':'coord')+'">'+(free?'✓ Envío gratis':'Envío a coordinar')+'</div>'+
+          '<div class="citem-bottom">'+
+            '<span class="citem-qty"><button data-q="'+idx+'|-1">−</button><span>'+l.qty+'</span><button data-q="'+idx+'|1">+</button></span>'+
+            '<span class="citem-line">'+COP(linePrice(l)*l.qty)+'</span>'+
+          '</div>'+
+          '<button class="citem-del" data-del="'+idx+'">Quitar</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+    var anyCoord=cart.some(function(l){return !lineFreeShip(l);});
+    sumLines.innerHTML='<div class="sum-row"><span>Subtotal ('+c+' ítem'+(c>1?'s':'')+')</span><span class="money">'+COP(total())+'</span></div>'+
+      '<div class="sum-row total"><span>Total</span><span class="money">'+COP(total())+'</span></div>';
+    sumShip.innerHTML = anyCoord
+      ? 'Los sopletes y la base en combo completo tienen <b>envío gratis</b>. El resto se coordina el envío al confirmar el pedido.'
+      : '🎉 Todo tu pedido tiene <b>envío gratis</b> a todo Colombia.';
+  }
+  cartItems.addEventListener('click',function(e){
+    var q=e.target.closest('[data-q]'); if(q){var s=q.getAttribute('data-q').split('|'); setQty(parseInt(s[0],10),parseInt(s[1],10)); return;}
+    var d=e.target.closest('[data-del]'); if(d){removeIdx(parseInt(d.getAttribute('data-del'),10)); return;}
+    var ed=e.target.closest('[data-edit]'); if(ed){ closeCart(); openModal(ed.getAttribute('data-edit')); }
+  });
+
+  function openCart(){ cartModal.classList.add('open'); cartModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeCart(){ cartModal.classList.remove('open'); cartModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  document.getElementById('openCart').addEventListener('click',openCart);
+  document.getElementById('mbCart').addEventListener('click',openCart);
+  document.getElementById('cartClose').addEventListener('click',closeCart);
+  cartModal.addEventListener('click',function(e){ if(e.target===cartModal) closeCart(); });
+
+  /* ---------- CHECKOUT ---------- */
+  var backCart=document.getElementById('backCart'), dirField=document.getElementById('dirField');
+  goCheckout.addEventListener('click',function(){ goCheckout.style.display='none'; checkoutForm.classList.add('show'); });
+  backCart.addEventListener('click',function(){ checkoutForm.classList.remove('show'); goCheckout.style.display='block'; });
+  checkoutForm.querySelectorAll('input[name="modo"]').forEach(function(r){
+    r.addEventListener('change',function(){
+      checkoutForm.querySelectorAll('.mode-toggle label').forEach(function(l){l.classList.remove('sel');});
+      r.closest('label').classList.add('sel');
+      dirField.style.display = r.value==='cotizar'?'none':'block';
+    });
+  });
+  checkoutForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var modo=checkoutForm.querySelector('input[name="modo"]:checked').value;
+    var req = modo==='comprar'?['nombre','tel','ciudad','direccion']:['nombre','tel','ciudad'];
+    var ok=true; checkoutForm.querySelectorAll('input').forEach(function(f){f.classList.remove('err');});
+    req.forEach(function(n){var f=checkoutForm.querySelector('[name="'+n+'"]'); if(!f.value.trim()){f.classList.add('err');ok=false;}});
+    if(!ok){var fe=checkoutForm.querySelector('.err'); if(fe)fe.focus(); return;}
+    var v=function(n){var f=checkoutForm.querySelector('[name="'+n+'"]'); return f?f.value.trim():'';};
+    var lines=['Hola FMR 👋 Quiero '+(modo==='comprar'?'comprar':'cotizar')+':','','🧾 *Pedido*'];
+    cart.forEach(function(l){
+      lines.push('• '+lineName(l)+' x'+l.qty+' — '+COP(linePrice(l)*l.qty));
+      if(byId[l.id].type==='combo') lines.push('   ('+lineCfgText(l)+')');
+      lines.push('   '+(lineFreeShip(l)?'Envío gratis':'Envío a coordinar'));
+    });
+    lines.push('• *Total: '+COP(total())+'*');
+    lines.push('','👤 *Mis datos*');
+    lines.push('• Nombre: '+v('nombre')); lines.push('• WhatsApp: '+v('tel')); lines.push('• Ciudad: '+v('ciudad'));
+    if(modo==='comprar') lines.push('• Dirección: '+v('direccion'));
+    if(v('notas')) lines.push('• Notas: '+v('notas'));
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(lines.join('\n')),'_blank');
+  });
+
+  /* ---------- FORMULARIO DE COTIZACIÓN ---------- */
+  var quoteForm=document.getElementById('quoteForm');
+  quoteForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=true; ['qnombre','qtel','qproducto'].forEach(function(n){var f=quoteForm.querySelector('[name="'+n+'"]'); f.classList.remove('err'); if(!f.value.trim()){f.classList.add('err');ok=false;}});
+    if(!ok){var fe=quoteForm.querySelector('.err'); if(fe)fe.focus(); return;}
+    var v=function(n){return quoteForm.querySelector('[name="'+n+'"]').value.trim();};
+    var lines=['Hola FMR 👋 Quiero una *cotización*:','',
+      '• Producto: '+v('qproducto'),
+      '• Nombre: '+v('qnombre'),
+      '• WhatsApp: '+v('qtel')];
+    if(v('qciudad')) lines.push('• Ciudad: '+v('qciudad'));
+    if(v('qmsg')) lines.push('• Mensaje: '+v('qmsg'));
+    window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(lines.join('\n')),'_blank');
+  });
+
+  /* ---------- LIGHTBOX ---------- */
+  var lightbox=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg');
+  function openLightbox(src){ lbImg.src=src; lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); }
+  function closeLightbox(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); }
+  document.getElementById('lbClose').addEventListener('click',closeLightbox);
+  lightbox.addEventListener('click',function(e){ if(e.target===lightbox) closeLightbox(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ if(lightbox.classList.contains('open'))closeLightbox(); else if(modal.classList.contains('open'))closeModal(); else if(cartModal.classList.contains('open'))closeCart(); } });
+
+  /* zoom de miniaturas (base + accesorios): captura para no togglear el accesorio */
+  document.addEventListener('click',function(e){
+    var z=e.target.closest('[data-zoom]');
+    if(z && z.getAttribute('data-zoom')){ e.stopPropagation(); openLightbox(z.getAttribute('data-zoom')); }
+  },true);
+
+  /* ---------- MERCADOPAGO ---------- */
+  var payMP=document.getElementById('payMP'), mpNote=document.getElementById('mpNote');
+  var mpReady=function(){ return !!(MP_LINK||MP_PUBLIC_KEY); };
+  if(payMP){
+    if(!mpReady()) payMP.classList.add('pending');
+    payMP.addEventListener('click',function(){
+      if(MP_LINK){ window.open(MP_LINK,'_blank'); return; }
+      if(mpNote){ mpNote.textContent='MercadoPago aún no está vinculado. Por ahora finalizá por WhatsApp; el pago en línea se activa al pegar el token.'; mpNote.style.color='var(--gold)'; }
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
