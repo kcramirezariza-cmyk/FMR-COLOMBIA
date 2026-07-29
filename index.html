@@ -65,6 +65,12 @@
   .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
   .hero-proof{margin-top:28px;display:flex;gap:22px;flex-wrap:wrap;color:var(--muted-2);font-size:13.5px}
   .hero-proof b{color:var(--fg)}
+  .paybadge{margin-top:20px;display:inline-flex;align-items:center;gap:11px;flex-wrap:wrap;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:10px 15px}
+  .paybadge-t{font-family:var(--fd);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .paybadge-s{font-size:12px;color:var(--muted-2)}
+  .mp-logo{height:30px;width:auto;display:block}
+  .foot-pay{margin-top:12px;background:none;border:none;padding:0;gap:9px}
+  @media(max-width:720px){.foot-pay{justify-content:center}}
   .hero-media{position:relative;background:#0b0b0c;overflow:hidden;min-height:440px}
   .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,15,.85),transparent 30%),linear-gradient(0deg,rgba(14,14,15,.4),transparent 40%)}
@@ -343,6 +349,11 @@
       <div><b>3–5 días</b> de entrega</div>
       <div><b>Envío gratis</b> en sopletes*</div>
     </div>
+    <div class="paybadge">
+      <span class="paybadge-t">Paga seguro con</span>
+      <img src="assets/mercadopago.png" alt="MercadoPago" class="mp-logo">
+      <span class="paybadge-s">tarjeta · PSE · efectivo</span>
+    </div>
   </div>
   <div class="hero-media"><img src="assets/IMG_4182.jpg" alt="Soplete FMR para joyería"></div>
 </section>
@@ -467,6 +478,10 @@
       <a href="https://wa.me/573159524569">WhatsApp 315 952 4569</a>
       <a href="mailto:ventas@fmrcolombia.com" data-social="email">ventas@fmrcolombia.com</a>
       <a href="#catalogo">Hacer un pedido</a>
+      <div class="paybadge foot-pay">
+        <span class="paybadge-t">Pagos con</span>
+        <img src="assets/mercadopago.png" alt="MercadoPago" class="mp-logo">
+      </div>
       <div class="socials">
         <a class="soc" href="https://facebook.com/fmrcolombia" target="_blank" rel="noopener" aria-label="Facebook" data-social="facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.9.3-1.5 1.6-1.5H16V5.1c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7v3h2.8v8z"/></svg></a>
         <a class="soc" href="https://instagram.com/fmrcolombia" target="_blank" rel="noopener" aria-label="Instagram" data-social="instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
