@@ -168,14 +168,17 @@
   .life{padding:0}
   .life-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line)}
   @media(max-width:760px){.life-grid{grid-template-columns:1fr}}
-  .life-card{position:relative;aspect-ratio:4/5;overflow:hidden;background:#000}
-  .life-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .life-card{position:relative;aspect-ratio:16/11;overflow:hidden;background:#000;cursor:zoom-in}
+  @media(max-width:760px){.life-card{aspect-ratio:16/10}}
+  .life-card img,.life-card video{width:100%;height:100%;object-fit:cover;object-position:center 60%;transition:transform .5s}
   .life-card:hover img{transform:scale(1.05)}
-  .life-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 55%)}
-  .life-cap{position:absolute;left:20px;bottom:18px;right:20px;z-index:2}
-  .life-cap .k{font-family:var(--fd);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
-  .life-cap h4{font-family:var(--fd);font-size:24px;font-weight:800;text-transform:uppercase;line-height:1;margin-top:4px}
-  .life-cap p{font-size:13px;color:#cfcfcf;margin-top:6px}
+  .life-card::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.82),transparent 48%);pointer-events:none}
+  .life-cap{position:absolute;left:16px;bottom:14px;right:16px;z-index:2;pointer-events:none}
+  .life-cap .k{font-family:var(--fd);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:700}
+  .life-cap h4{font-family:var(--fd);font-size:20px;font-weight:800;text-transform:uppercase;line-height:1;margin-top:3px}
+  .life-cap p{font-size:12px;color:#cfcfcf;margin-top:4px}
+  .life-zoom{position:absolute;top:10px;right:10px;z-index:3;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;justify-content:center;color:#fff}
+  .life-zoom svg{width:15px;height:15px}
 
   /* GARANTÍA */
   .assure{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -344,9 +347,21 @@
 <!-- LIFESTYLE -->
 <section class="life">
   <div class="life-grid">
-    <div class="life-card"><img src="assets/life-llama.jpg" alt="Llama del soplete FMR"><div class="life-cap"><div class="k">Llama estable</div><h4>Fuego que obedece</h4><p>Dardo azul parejo de 400 a 1.300 °C.</p></div></div>
-    <div class="life-card"><img src="assets/life-fuego.jpg" alt="Soldando una pieza"><div class="life-cap"><div class="k">En el banco</div><h4>Suelda y funde</h4><p>Filigrana, cadenas, recocido y reparación.</p></div></div>
-    <div class="life-card"><img src="assets/life-boquilla.jpg" alt="Boquillas intercambiables"><div class="life-cap"><div class="k">3 boquillas</div><h4>Cada trabajo, su pico</h4><p>Cambio rápido entre chica, mediana y grande.</p></div></div>
+    <div class="life-card" data-zoomvid="assets/video/IMG_0956.mp4" data-poster="assets/life-llama.jpg">
+      <video src="assets/video/IMG_0956.mp4" poster="assets/life-llama.jpg" autoplay muted loop playsinline preload="metadata" style="object-position:65% 58%"></video>
+      <span class="life-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
+      <div class="life-cap"><div class="k">Llama estable</div><h4>Fuego que obedece</h4><p>Dardo azul parejo de 400 a 1.300 °C.</p></div>
+    </div>
+    <div class="life-card" data-zoom="assets/life-fuego.jpg">
+      <img src="assets/life-fuego.jpg" alt="Soldando una pieza" style="object-position:center 52%">
+      <span class="life-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
+      <div class="life-cap"><div class="k">En el banco</div><h4>Suelda y funde</h4><p>Filigrana, cadenas, recocido y reparación.</p></div>
+    </div>
+    <div class="life-card" data-zoom="assets/life-boquilla.jpg">
+      <img src="assets/life-boquilla.jpg" alt="Boquillas intercambiables" style="object-position:center 50%">
+      <span class="life-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></span>
+      <div class="life-cap"><div class="k">3 boquillas</div><h4>Cada trabajo, su pico</h4><p>Cambio rápido entre chica, mediana y grande.</p></div>
+    </div>
   </div>
 </section>
 
@@ -503,6 +518,7 @@
 <div class="modal" id="lightbox" aria-hidden="true" style="background:rgba(0,0,0,.94);z-index:400">
   <button class="modal-close" id="lbClose" style="top:18px;right:20px">&times;</button>
   <img id="lbImg" src="" alt="" style="max-width:92%;max-height:90vh;object-fit:contain;border-radius:10px">
+  <video id="lbVid" src="" controls muted playsinline style="display:none;max-width:92%;max-height:90vh;border-radius:10px"></video>
 </div>
 
 <script>
@@ -662,7 +678,7 @@
 
   function showMedia(m){
     var v=mgMain.querySelector('video'); if(v)v.pause();
-    if(m.t==='video'){ mgMain.innerHTML='<video src="'+m.src+'" poster="'+(m.poster||'')+'" controls playsinline preload="metadata"></video>'; }
+    if(m.t==='video'){ mgMain.innerHTML='<video src="'+m.src+'" poster="'+(m.poster||'')+'" controls muted playsinline preload="metadata"></video>'; }
     else { mgMain.innerHTML='<img src="'+m.src+'" class="zoomable" alt="">'; mgMain.querySelector('img').addEventListener('click',function(){openLightbox(m.src);}); }
   }
 
@@ -853,16 +869,19 @@
     window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(lines.join('\n')),'_blank');
   });
 
-  /* ---------- LIGHTBOX ---------- */
-  var lightbox=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg');
-  function openLightbox(src){ lbImg.src=src; lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); }
-  function closeLightbox(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); }
+  /* ---------- LIGHTBOX (imagen o video) ---------- */
+  var lightbox=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg'), lbVid=document.getElementById('lbVid');
+  function openLightbox(src){ lbVid.pause(); lbVid.style.display='none'; lbImg.style.display=''; lbImg.src=src; lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); }
+  function openLightboxVideo(src,poster){ lbImg.style.display='none'; lbVid.style.display=''; lbVid.src=src; if(poster)lbVid.poster=poster; lbVid.muted=true; lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); lbVid.play().catch(function(){}); }
+  function closeLightbox(){ lbVid.pause(); lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); }
   document.getElementById('lbClose').addEventListener('click',closeLightbox);
   lightbox.addEventListener('click',function(e){ if(e.target===lightbox) closeLightbox(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ if(lightbox.classList.contains('open'))closeLightbox(); else if(modal.classList.contains('open'))closeModal(); else if(cartModal.classList.contains('open'))closeCart(); } });
 
   /* zoom de miniaturas (base + accesorios): captura para no togglear el accesorio */
   document.addEventListener('click',function(e){
+    var zv=e.target.closest('[data-zoomvid]');
+    if(zv && zv.getAttribute('data-zoomvid')){ e.stopPropagation(); openLightboxVideo(zv.getAttribute('data-zoomvid'), zv.getAttribute('data-poster')); return; }
     var z=e.target.closest('[data-zoom]');
     if(z && z.getAttribute('data-zoom')){ e.stopPropagation(); openLightbox(z.getAttribute('data-zoom')); }
   },true);
