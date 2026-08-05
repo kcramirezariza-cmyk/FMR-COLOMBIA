@@ -1,3 +1,7 @@
+https://raw.githubusercontent.com/kcramirezariza-cmyk/FMR-COLOMBIA/main/index.html
+→ https://raw.githubusercontent.com/kcramirezariza-cmyk/FMR-COLOMBIA/main/index.html
+Content-Type: text/plain; charset=utf-8
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -613,11 +617,12 @@
   var WA='573159524569';
   var COP=function(n){return '$'+Number(n).toLocaleString('es-CO');};
 
-  /* ===== MERCADOPAGO — pegá aquí los datos cuando los tengas ===== */
-  /* Opción simple (sin backend): un "Link de pago" de MercadoPago. Pegalo en MP_LINK. */
-  /* Opción avanzada (Checkout Pro/Bricks): requiere public key + preferencia desde tu cuenta. */
-  var MP_LINK   = '';   // ej: 'https://mpago.la/xxxxxxx'  ← link de pago de MercadoPago
-  var MP_PUBLIC_KEY = ''; // ej: 'APP_USR-xxxxxxxx' (solo si usás Checkout Bricks)
+  /* ===== MERCADOPAGO (Checkout Pro con backend seguro) ===== */
+  /* El ACCESS TOKEN nunca va aquí: vive como variable de entorno en la función serverless. */
+  /* Pegá abajo la URL de tu función desplegada en Vercel/Netlify. */
+  var MP_API = 'https://TU-PROYECTO.vercel.app/api/create-preference'; // <-- reemplazá por tu URL real
+  var MP_LINK = '';        // (opcional) link de pago fijo de respaldo
+  var MP_PUBLIC_KEY = '';  // (opcional) solo si algún día usás Checkout Bricks
   /* ============================================================== */
 
   var SPECS_SOPLETE=[
@@ -969,14 +974,33 @@
     if(z && z.getAttribute('data-zoom')){ e.stopPropagation(); openLightbox(z.getAttribute('data-zoom')); }
   },true);
 
-  /* ---------- MERCADOPAGO ---------- */
+  /* ---------- MERCADOPAGO (Checkout Pro) ---------- */
   var payMP=document.getElementById('payMP'), mpNote=document.getElementById('mpNote');
-  var mpReady=function(){ return !!(MP_LINK||MP_PUBLIC_KEY); };
+  var mpConfigured=function(){ return MP_API && MP_API.indexOf('TU-PROYECTO')<0; };
   if(payMP){
-    if(!mpReady()) payMP.classList.add('pending');
+    if(!mpConfigured() && !MP_LINK) payMP.classList.add('pending');
     payMP.addEventListener('click',function(){
-      if(MP_LINK){ window.open(MP_LINK,'_blank'); return; }
-      if(mpNote){ mpNote.textContent='MercadoPago aún no está vinculado. Por ahora finalizá por WhatsApp; el pago en línea se activa al pegar el token.'; mpNote.style.color='var(--gold)'; }
+      if(!cart.length){ if(mpNote){mpNote.textContent='Tu carrito está vacío.'; mpNote.style.color='var(--gold)';} return; }
+      if(!mpConfigured() && MP_LINK){ window.open(MP_LINK,'_blank'); return; }
+      if(!mpConfigured()){ if(mpNote){mpNote.textContent='MercadoPago aún no está vinculado. Finalizá por WhatsApp mientras se activa el pago en línea.'; mpNote.style.color='var(--gold)';} return; }
+
+      var items=cart.map(function(l){ return { title:lineName(l), quantity:l.qty, unit_price:linePrice(l) }; });
+      var nombre=(checkoutForm.querySelector('[name=\"nombre\"]')||{}).value||'';
+      var oldTxt=payMP.textContent;
+      payMP.disabled=true; payMP.textContent='Generando pago…';
+      if(mpNote){ mpNote.textContent='Conectando con MercadoPago…'; mpNote.style.color='var(--muted)'; }
+
+      fetch(MP_API,{ method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ items:items, payer:{ name:nombre } }) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.init_point){ window.location.href=d.init_point; }
+        else { throw new Error(d && d.error ? d.error : 'Respuesta inválida'); }
+      })
+      .catch(function(){
+        payMP.disabled=false; payMP.textContent=oldTxt;
+        if(mpNote){ mpNote.textContent='No se pudo iniciar el pago. Intentá de nuevo o finalizá por WhatsApp.'; mpNote.style.color='var(--gold)'; }
+      });
     });
   }
 
